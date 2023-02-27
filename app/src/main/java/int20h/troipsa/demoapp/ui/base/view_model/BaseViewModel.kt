@@ -1,0 +1,69 @@
+package int20h.troipsa.demoapp.ui.base.view_model
+
+import androidx.annotation.CallSuper
+import androidx.lifecycle.ViewModel
+import int20h.troipsa.demoapp.ui.base.view_model.errors.AppError
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.EmptyCoroutineContext
+
+open class BaseViewModel(dispatcher: CoroutineDispatcher = Dispatchers.Default) : ViewModel() {
+
+    private val coroutineExecutor = CoroutineExecutor(dispatcher)
+
+    val scope: CoroutineScope
+        get() = coroutineExecutor.scope
+
+    /** Flow for posting error to UI*/
+    val error: SharedFlow<AppError>
+        get() = coroutineExecutor.error
+
+    /** Flow for showing progress on UI*/
+    val progress: StateFlow<Boolean>
+        get() = coroutineExecutor.progress
+
+    private val _closeScreen = MutableSharedFlow<Unit>()
+    val closeScreen = _closeScreen.asSharedFlow()
+
+
+    @CallSuper
+    override fun onCleared() {
+        super.onCleared()
+        coroutineExecutor.cancelScope()
+    }
+
+    fun handleException(throwable: Throwable) {
+        coroutineExecutor.handleException(throwable)
+    }
+
+    fun closeScreen() {
+        runCoroutine {
+            _closeScreen.emit(Unit)
+        }
+    }
+
+    protected fun runCoroutine(
+        context: CoroutineContext = EmptyCoroutineContext,
+        withProgress: Boolean = false,
+        exceptionHandler: (suspend (Exception) -> Boolean)? = null,
+        block: suspend CoroutineScope.() -> Unit
+    ): Job {
+        return coroutineExecutor.runCoroutine(context, withProgress, exceptionHandler, block)
+    }
+
+    protected fun runCoroutine(
+        context: CoroutineContext = EmptyCoroutineContext,
+        progressHandler: (suspend (Boolean) -> Unit)?,
+        exceptionHandler: (suspend (Exception) -> Boolean)? = null,
+        block: suspend CoroutineScope.() -> Unit
+    ): Job {
+        return coroutineExecutor.runCoroutine(context, progressHandler, exceptionHandler, block)
+    }
+}
