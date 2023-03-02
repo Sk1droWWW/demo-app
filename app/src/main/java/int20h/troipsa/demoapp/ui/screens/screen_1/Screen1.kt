@@ -45,7 +45,7 @@ private fun Screen1(
     val coroutineScope = rememberCoroutineScope()
     LazyColumn(
         modifier = Modifier
-            .background(Color.White.copy(alpha = 0.2f))
+            .background(color = Color.Cyan.copy(alpha = 0.2f))
             .fillMaxSize()
 //            .background(pageBackgroundColor),
     ) {

@@ -1,5 +1,6 @@
 package int20h.troipsa.demoapp.ui.navigation
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -18,14 +19,20 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.google.accompanist.navigation.animation.AnimatedNavHost
+import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import int20h.troipsa.demoapp.R
 import int20h.troipsa.demoapp.ui.screens.screen_1.Screen1
 import int20h.troipsa.demoapp.ui.screens.screen_2.Screen2
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
+@OptIn(
+    ExperimentalMaterial3Api::class,
+    ExperimentalLayoutApi::class,
+    ExperimentalAnimationApi::class
+)
 @Composable
 fun DemoAppNavHost() {
-    val navController = rememberNavController()
+    val navController = rememberAnimatedNavController()
 
     val bottomNavItems = listOf(
         Screen.Screen1,
@@ -62,17 +69,18 @@ fun DemoAppNavHost() {
     }
 }
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 private fun DemoAppNavigation(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
-    NavHost(
+    AnimatedNavHost(
         navController = navController,
         startDestination = Screen.Screen1.route,
         modifier = modifier
     ) {
-        composable(Screen.Screen1.route) {
+        horizontallyAnimatedComposable(Screen.Screen1.route) {
             Screen1(
                 navController = navController,
                 navigateToScreen2 = { arg ->
@@ -80,7 +88,7 @@ private fun DemoAppNavigation(
                 },
             )
         }
-        composable(
+        horizontallyAnimatedComposable(
             route = Screen.Screen3.route,
         ) {
             Screen2(
@@ -88,7 +96,7 @@ private fun DemoAppNavigation(
                 popBackStack = { navController.popBackStack() }
             )
         }
-        composable(
+        verticallyAnimatedComposable(
             route = Screen.Screen2.withArgsFormat(Screen.Screen2.arg),
             arguments = listOf(
                 navArgument(Screen.Screen2.arg) { type = NavType.IntType }
