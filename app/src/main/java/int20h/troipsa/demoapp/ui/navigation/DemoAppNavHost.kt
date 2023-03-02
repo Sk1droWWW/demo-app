@@ -29,7 +29,7 @@ fun DemoAppNavHost() {
 
     val bottomNavItems = listOf(
         Screen.Screen1,
-        Screen.Screen2
+        Screen.Screen3
     )
 
     Scaffold(
@@ -52,7 +52,7 @@ fun DemoAppNavHost() {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .consumedWindowInsets(paddingValues = innerPadding)
+                .consumeWindowInsets(paddingValues = innerPadding)
                 .windowInsetsPadding(
                     WindowInsets.safeDrawing.only(
                         WindowInsetsSides.Horizontal,
@@ -78,6 +78,14 @@ private fun DemoAppNavigation(
                 navigateToScreen2 = { arg ->
                     navController.navigate(Screen.Screen2.withArgs(arg.toString()))
                 },
+            )
+        }
+        composable(
+            route = Screen.Screen3.route,
+        ) {
+            Screen2(
+                argFromScreen1 = 0,
+                popBackStack = { navController.popBackStack() }
             )
         }
         composable(

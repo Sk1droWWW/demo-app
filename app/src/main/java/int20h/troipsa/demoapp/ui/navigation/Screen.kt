@@ -10,10 +10,11 @@ sealed class Screen(
     @DrawableRes val iconRes: Int? = null,
 ) {
     object Screen1 : Screen("calendar", R.string.screen_1_string_1, R.drawable.ic_calendar)
-
-    object Screen2 : Screen("screen2", R.string.screen_2_string_1) {
+    object Screen2 : Screen("screen2", R.string.screen_2_string_1, R.drawable.ic_calendar) {
         val arg = "arg"
     }
+
+    object Screen3 : Screen("screen3", R.string.screen_1_string_1, R.drawable.ic_calendar)
 
 
     // build navigation path (for screen navigation)
