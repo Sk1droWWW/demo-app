@@ -5,7 +5,7 @@ buildscript {
         activity_version = '1.6.1'
 
         compose_material = '1.0.1'
-        accompanist_version = '0.28.0'
+        accompanist_version = '0.29.1-alpha'
 
         hilt_version = '2.42'
         hilt_androidx_version = '1.0.0'

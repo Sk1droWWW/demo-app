@@ -89,6 +89,7 @@ dependencies {
 
     // Accompanist
     implementation "com.google.accompanist:accompanist-navigation-animation:$accompanist_version"
+    implementation "com.google.accompanist:accompanist-systemuicontroller:$accompanist_version"
     implementation "com.google.accompanist:accompanist-flowlayout:$accompanist_version"
 
     // Room
@@ -124,8 +125,6 @@ dependencies {
 
     // Navigation
     implementation "androidx.navigation:navigation-compose:$compose_nav_version"
-
-    implementation "com.google.accompanist:accompanist-systemuicontroller:0.29.1-alpha"
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
