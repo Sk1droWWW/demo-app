@@ -1,11 +1,11 @@
 package int20h.troipsa.demoapp.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Shapes
+import androidx.compose.material3.Shapes
 import androidx.compose.ui.unit.dp
 
-val Shapes = Shapes(
-    small = RoundedCornerShape(4.dp),
-    medium = RoundedCornerShape(8.dp),
-    large = RoundedCornerShape(12.dp)
+val DemoShapes = Shapes(
+    small = RoundedCornerShape(percent = 50),
+    medium = RoundedCornerShape(size = 8.dp),
+    large = RoundedCornerShape(size = 0.dp)
 )

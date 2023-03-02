@@ -7,7 +7,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-//import int20h.troipsa.demoapp.BuildConfig
+import int20h.troipsa.demoapp.BuildConfig
 import int20h.troipsa.demoapp.data.local.MainDatabase
 import int20h.troipsa.demoapp.data.network.ApiService
 import int20h.troipsa.demoapp.data.prefs.DemoPrefManager
@@ -34,8 +34,7 @@ class DataSourceModule {
     fun provideApiService(): ApiService {
         val okHttpClient = createOkHttpClient()
 
-        // TODO:  
-        return createRetrofitService(okHttpClient, "BuildConfig.BASE_URL")
+        return createRetrofitService(okHttpClient, BuildConfig.BASE_URL)
     }
 
     @Provides

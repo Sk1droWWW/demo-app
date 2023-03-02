@@ -3,8 +3,8 @@ package int20h.troipsa.demoapp.data.prefs.base
 import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 import int20h.troipsa.demoapp.utils.DateConvertUtils
-import int20h.troipsa.demoapp.utils.gson.LocalDateSerializer
-import int20h.troipsa.demoapp.utils.gson.LocalDateTimeSerializer
+import int20h.troipsa.demoapp.utils.kotlin_serialization.LocalDateSerializer
+import int20h.troipsa.demoapp.utils.kotlin_serialization.LocalDateTimeSerializer
 import kotlinx.serialization.modules.SerializersModule
 import java.time.LocalDate
 import java.time.LocalDateTime

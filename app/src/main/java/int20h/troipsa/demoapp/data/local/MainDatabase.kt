@@ -12,6 +12,7 @@ import int20h.troipsa.demoapp.data.local.utils.LocalDateTimeConverter
         UserEntity::class,
         EventEntity::class,
         EventTypeEntity::class,
+        SampleEntity::class,
     ],
     version = 1,
     exportSchema = true
@@ -25,6 +26,8 @@ abstract class MainDatabase : RoomDatabase() {
 
     abstract fun eventsDao(): EventsDao
     abstract fun eventsTypeDao(): EventsTypeDao
+
+    abstract fun sampleDao(): SampleDao
 
     companion object {
         private const val DATABASE_NAME = "pseudo_calendar_db"

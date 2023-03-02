@@ -1,8 +1,9 @@
-package int20h.troipsa.demoapp.data.repository
+package int20h.troipsa.demoapp.data.repository.events
 
 import int20h.troipsa.demoapp.data.local.entity.EventEntity
 import int20h.troipsa.demoapp.data.local.entity.EventTypeEntity
 import int20h.troipsa.demoapp.data.local.entity.EventWithTypeProjection
+import int20h.troipsa.demoapp.data.repository.DataRepository
 import kotlinx.coroutines.flow.Flow
 
 fun DataRepository.getEvent(eventId: Int): Flow<EventWithTypeProjection> {

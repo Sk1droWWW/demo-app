@@ -1,9 +1,6 @@
 package int20h.troipsa.demoapp.domain.interactors.events
 
-import int20h.troipsa.demoapp.data.local.mapper.EventMapper
 import int20h.troipsa.demoapp.data.repository.DataRepository
-import int20h.troipsa.demoapp.data.repository.addEvent
-import int20h.troipsa.demoapp.data.repository.addEventType
 import int20h.troipsa.demoapp.domain.models.Event
 import javax.inject.Inject
 

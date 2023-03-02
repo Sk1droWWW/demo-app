@@ -2,7 +2,7 @@ package int20h.troipsa.demoapp.domain.interactors.events
 
 import int20h.troipsa.demoapp.data.local.mapper.EventMapper
 import int20h.troipsa.demoapp.data.repository.DataRepository
-import int20h.troipsa.demoapp.data.repository.getEvent
+import int20h.troipsa.demoapp.data.repository.events.getEvent
 import int20h.troipsa.demoapp.domain.models.Event
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

@@ -5,8 +5,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.core.view.WindowCompat
 import dagger.hilt.android.AndroidEntryPoint
-import int20h.troipsa.demoapp.ui.navigation.PseudoCalendarNavHost
+import int20h.troipsa.demoapp.ui.navigation.DemoAppNavHost
 import int20h.troipsa.demoapp.ui.theme.DemoAppTheme
 
 
@@ -19,8 +20,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
+            WindowCompat.setDecorFitsSystemWindows(window, false)
             DemoAppTheme {
-                PseudoCalendarNavHost()
+                DemoAppNavHost()
             }
         }
     }
