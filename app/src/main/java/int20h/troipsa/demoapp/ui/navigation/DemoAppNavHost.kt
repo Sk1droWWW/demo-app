@@ -24,6 +24,7 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import int20h.troipsa.demoapp.R
 import int20h.troipsa.demoapp.ui.screens.screen_1.Screen1
 import int20h.troipsa.demoapp.ui.screens.screen_2.Screen2
+import int20h.troipsa.demoapp.ui.screens.screen_3.Screen3
 
 @OptIn(
     ExperimentalMaterial3Api::class,
@@ -45,7 +46,7 @@ fun DemoAppNavHost() {
         contentColor = MaterialTheme.colorScheme.onBackground,
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
         bottomBar = {
-            //todo maybe will need to hide bottom bar on some screens
+            // todo maybe will need to hide bottom bar on some screens
             if (true) {
                 DemoAppBottomNavigation(
                     navController = navController,
@@ -86,14 +87,9 @@ private fun DemoAppNavigation(
                 navigateToScreen2 = { arg ->
                     navController.navigate(Screen.Screen2.withArgs(arg.toString()))
                 },
-            )
-        }
-        horizontallyAnimatedComposable(
-            route = Screen.Screen3.route,
-        ) {
-            Screen2(
-                argFromScreen1 = 0,
-                popBackStack = { navController.popBackStack() }
+                navigateToScreen3 = { arg ->
+                    navController.navigate(Screen.Screen3.withArgs(arg.toString()))
+                }
             )
         }
         verticallyAnimatedComposable(
@@ -104,6 +100,17 @@ private fun DemoAppNavigation(
         ) { navBackStackEntry ->
             Screen2(
                 argFromScreen1 = navBackStackEntry.arguments?.getInt(Screen.Screen2.arg),
+                popBackStack = { navController.popBackStack() }
+            )
+        }
+        verticallyAnimatedComposable(
+            route = Screen.Screen3.withArgsFormat(Screen.Screen3.demoArgument),
+            arguments = listOf(
+                navArgument(Screen.Screen3.demoArgument) { type = NavType.IntType }
+            )
+        ) { navBackStackEntry ->
+            Screen3(
+                argumentFromScreen1 = navBackStackEntry.arguments?.getInt(Screen.Screen3.demoArgument),
                 popBackStack = { navController.popBackStack() }
             )
         }

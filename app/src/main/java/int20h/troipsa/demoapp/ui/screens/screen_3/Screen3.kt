@@ -1,4 +1,4 @@
-package int20h.troipsa.demoapp.ui.screens.screen_1
+package int20h.troipsa.demoapp.ui.screens.screen_3
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -12,39 +12,39 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import int20h.troipsa.demoapp.ui.base.ui.PseudoScaffold
 import int20h.troipsa.demoapp.ui.components.PrimaryButton
 import int20h.troipsa.demoapp.ui.theme.*
-import int20h.troipsa.demoapp.utils.extension.clickable
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Screen1(
-    navController: NavHostController,
-    navigateToScreen2: (Long) -> Unit,
-    navigateToScreen3: (Int) -> Unit,
+fun Screen3(
+    popBackStack: () -> Unit,
+    argumentFromScreen1: Int?,
 ) {
     PseudoScaffold(
         modifier = Modifier.systemBarsPadding(),
     ) {
-        val viewModel = hiltViewModel<Screen1ViewModel>()
-
-        val allSamples = viewModel.allSample.collectAsState()
-
-        Screen1(
-            navigateToScreen2 = navigateToScreen2,
-            navigateToScreen3 = navigateToScreen3,
-        )
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+        ) {
+            Text(
+                text = "Screen 3, argument: $argumentFromScreen1",
+                color = MaterialTheme.colorScheme.onPrimaryContainer,
+                modifier = Modifier
+                    .background(color = MaterialTheme.colorScheme.primaryContainer)
+                    .padding(16.dp)
+                    .fillMaxWidth()
+            )
+        }
     }
 }
 
 @Composable
 private fun Screen1(
-    navigateToScreen2: (Long) -> Unit,
-    navigateToScreen3: (Int) -> Unit
+    navigateToScreen2: (Long) -> Unit
 ) {
     val coroutineScope = rememberCoroutineScope()
     LazyColumn(
@@ -56,7 +56,7 @@ private fun Screen1(
         item {
             PrimaryButton(
                 text = "Sample Button",
-                onClick = { navigateToScreen3(3) },
+                onClick = { /*TODO*/ },
                 modifier = Modifier
                     .padding(16.dp)
                     .fillMaxWidth()
@@ -81,8 +81,8 @@ private fun Screen1(
 @Preview
 @Composable
 private fun Preview() {
-//    Screen1(
-//        navigateToScreen2 = {},
-//    )
+    Screen1(
+        navigateToScreen2 = {},
+    )
 }
 

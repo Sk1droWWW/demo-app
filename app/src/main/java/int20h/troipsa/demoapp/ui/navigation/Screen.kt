@@ -14,8 +14,9 @@ sealed class Screen(
         val arg = "arg"
     }
 
-    object Screen3 : Screen("screen3", R.string.screen_1_string_1, R.drawable.ic_calendar)
-
+    object Screen3 : Screen("screen3", R.string.screen_1_string_1) {
+        val demoArgument = "demoArgument"
+    }
 
     // build navigation path (for screen navigation)
     fun withArgs(vararg args: String): String {
