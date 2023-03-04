@@ -24,12 +24,9 @@ import int20h.troipsa.demoapp.ui.theme.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MapScreenContent(
     showBottomSheet: (Boolean) -> Unit,
-//    navigateToScreen2: (Long) -> Unit,
-//    navigateToScreen3: (Int) -> Unit,
 ) {
     PseudoScaffold(
 //        modifier = Modifier.navigationBarsPadding(),
