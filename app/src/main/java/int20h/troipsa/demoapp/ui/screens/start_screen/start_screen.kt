@@ -1,148 +1,222 @@
 package int20h.troipsa.demoapp.ui.screens.start_screen
 
-import androidx.compose.foundation.Image
+import android.content.Intent
+import android.graphics.Rect
+import android.net.Uri
+import android.view.ViewTreeObserver
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.toSize
+import int20h.troipsa.demoapp.BuildConfig
+import int20h.troipsa.demoapp.R
+import int20h.troipsa.demoapp.ui.components.PrimaryButton
+import int20h.troipsa.demoapp.ui.theme.DemoAppTheme
+import int20h.troipsa.demoapp.utils.extension.bold
+import int20h.troipsa.demoapp.utils.extension.medium
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 fun StartScreen(
-    options1: List<String>,
-    options2: List<String>,
-    onStartClick: () -> Unit,
     modifier: Modifier = Modifier,
-    logo: ImageBitmap,
-    appName: String
-    ) {
-        var expanded1 by remember { mutableStateOf(false) }
-        var expanded2 by remember { mutableStateOf(false) }
-        var query1 by remember { mutableStateOf("") }
-        var query2 by remember { mutableStateOf("") }
-        var selectedOption1 by remember { mutableStateOf(options1.firstOrNull()) }
-        var selectedOption2 by remember { mutableStateOf(options2.firstOrNull()) }
+    list_university: List<String> = listOf("KPI"),
+    list_group: List<String>,
+    onStartClick: () -> Unit
+) {
+    var expanded_university by remember { mutableStateOf(false) }
+    var expanded_group by remember { mutableStateOf(false) }
 
-        Column(modifier = modifier.fillMaxWidth()) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(text = appName)
-            }
+    var SelectedText_university by remember { mutableStateOf("") }
+    var TextFieldSize_university by remember { mutableStateOf(Size.Zero) }
 
-            Spacer(modifier = Modifier.height(16.dp))
+    var SelectedText_group by remember { mutableStateOf("") }
+    var TextFieldSize_group by remember { mutableStateOf(Size.Zero) }
 
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Image(bitmap = logo, contentDescription = "Logo")
-            }
+    val icon_university = if (expanded_university)
+        Icons.Filled.KeyboardArrowUp
+    else
+        Icons.Filled.KeyboardArrowDown
 
-            Spacer(modifier = Modifier.height(16.dp))
+    val icon_group = if (expanded_group)
+        Icons.Filled.KeyboardArrowUp
+    else
+        Icons.Filled.KeyboardArrowDown
 
-            Box(modifier = Modifier.weight(1f)) {
-                ExposedDropdownMenuBox(
-                    expanded = expanded1,
-                    onExpandedChange = {
-                        expanded1 = !expanded1
-                    }
-                ) {
+    val isKeyboardOpen by keyboardAsState()
 
-                    TextField(
-                        value = query1,
-                        onValueChange = { query1 = it },
-                        label = { Text(text = "Label") },
-                        trailingIcon = {
-                            ExposedDropdownMenuDefaults.TrailingIcon(
-                                expanded = expanded1
-                            )
-                        },
-                        colors = ExposedDropdownMenuDefaults.textFieldColors()
-                    )
+    DemoAppTheme {
+        Column(
+            modifier = modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.surface)
+                .statusBarsPadding()
+                .imePadding()
+                .padding(horizontal = 20.dp)
+        ) {
 
-                    val filteringOptions =
-                        options1.filter { it.contains(query1, ignoreCase = true) }
+            Text(
+                text = stringResource(R.string.app_name),
+                style = MaterialTheme.typography.displayLarge.bold(),
+                color = if (isKeyboardOpen == Keyboard.Closed)
+                    MaterialTheme.colorScheme.onBackground else MaterialTheme.colorScheme.surface,
+                overflow = TextOverflow.Ellipsis,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .padding(vertical = 4.dp)
+                    .fillMaxWidth()
+            )
 
-                    if (options1.isNotEmpty()) {
+            Image(
+                painter = painterResource(id = R.drawable.img_legal),
+                contentDescription = null,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(3f/2f)
+                    .clip(RoundedCornerShape(8.dp))
+                    .padding(top = 25.dp, bottom = 16.dp)
+                    .background(MaterialTheme.colorScheme.onSecondary),
+                contentScale = ContentScale.Crop
+            )
 
-                        ExposedDropdownMenu(
-                            expanded = expanded1,
-                            onDismissRequest = { expanded1 = false }
-                        ) {
-                            options1.forEach { selectionOption ->
-                                DropdownMenuItem(
-                                    text = { Text(text = selectionOption) },
-                                    onClick = {
-                                        query1 = selectionOption
-                                        expanded1 = false
-                                    }
-                                )
-                            }
-                        }
-                    }
-                }
-            }
+            Spacer(modifier = Modifier.weight(1f))
 
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Box(modifier = Modifier.weight(1f)) {
-                OutlinedTextField(
-                    value = query2,
-                    onValueChange = {
-                        query2 = it
+            OutlinedTextField(
+                value = SelectedText_university,
+                onValueChange = { SelectedText_university = it },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .onGloballyPositioned { coordinates ->
+                        TextFieldSize_university = coordinates.size.toSize()
                     },
-                    label = { Text("Search 2") },
-                    singleLine = true,
-                    keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Text),
-                    modifier = Modifier.fillMaxWidth()
-                )
-                DropdownMenu(
-                    expanded = expanded2,
-                    onDismissRequest = { expanded2 = false },
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    options2.forEach { option ->
-                        DropdownMenuItem(
-                            text = { Text(text = option) },
-                            onClick = {
-                                selectedOption2 = option
-                                expanded2 = false
-                            }
-                        )
-                    }
+                label = { Text(stringResource(R.string.select_university_label)) },
+                trailingIcon = {
+                    Icon(icon_university, "contentDescription",
+                        Modifier.clickable { expanded_university = !expanded_university })
+                }
+            )
+
+            DropdownMenu(
+                expanded = expanded_university,
+                onDismissRequest = { expanded_university = false },
+                modifier = Modifier
+                    .width(with(LocalDensity.current) { TextFieldSize_university.width.toDp() })
+            ) {
+                list_university.forEach { university ->
+                    DropdownMenuItem(
+                        text = { Text(text = university) },
+                        onClick = {
+                            SelectedText_university = university
+                            expanded_university = false
+                        })
                 }
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.padding(vertical = 2.dp))
 
-            Button(
-                onClick = { onStartClick() },
-                modifier = Modifier.align(Alignment.End)
+            OutlinedTextField(
+                value = SelectedText_group,
+                onValueChange = { SelectedText_group = it },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .onGloballyPositioned { coordinates ->
+                        TextFieldSize_group = coordinates.size.toSize()
+                    },
+                label = { Text(stringResource(R.string.select_group_label)) },
+                trailingIcon = {
+                    Icon(icon_group, "contentDescription",
+                        Modifier.clickable { expanded_group = !expanded_group })
+                }
+            )
+
+            DropdownMenu(
+                expanded = expanded_group,
+                onDismissRequest = { expanded_group = false },
+                modifier = Modifier
+                    .width(with(LocalDensity.current) { TextFieldSize_group.width.toDp() })
             ) {
-                Text(text = "Start")
+                list_group.forEach { group ->
+                    DropdownMenuItem(
+                        text = { Text(text = group) },
+                        onClick = {
+                            SelectedText_group = group
+                            expanded_group = false
+                        })
+                }
             }
+
+            Spacer(modifier = Modifier.weight(1f))
+
+            PrimaryButton(
+                text = stringResource(R.string.start_button),
+                onClick = { onStartClick() },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        vertical = 8.dp
+                    )
+            )
         }
     }
+}
+
+enum class Keyboard {
+    Opened, Closed
+}
+
+@Composable
+fun keyboardAsState(): State<Keyboard> {
+    val keyboardState = remember { mutableStateOf(Keyboard.Closed) }
+    val view = LocalView.current
+    DisposableEffect(view) {
+        val onGlobalListener = ViewTreeObserver.OnGlobalLayoutListener {
+            val rect = Rect()
+            view.getWindowVisibleDisplayFrame(rect)
+            val screenHeight = view.rootView.height
+            val keypadHeight = screenHeight - rect.bottom
+            keyboardState.value = if (keypadHeight > screenHeight * 0.15) {
+                Keyboard.Opened
+            } else {
+                Keyboard.Closed
+            }
+        }
+        view.viewTreeObserver.addOnGlobalLayoutListener(onGlobalListener)
+
+        onDispose {
+            view.viewTreeObserver.removeOnGlobalLayoutListener(onGlobalListener)
+        }
+    }
+
+    return keyboardState
+}
 
 @Preview
 @Composable
 private fun Preview() {
     StartScreen(
-        options1 = listOf("Option 1", "Option 2", "Option 3"),
-        options2 = listOf("Option 1", "Option 2", "Option 3"),
+        list_group = listOf("Option 1", "Option 2", "Option 3", "Option 2", "Option 3", "Option 2", "Option 3", "Option 2", "Option 3", "Option 2", "Option 3", "Option 2", "Option 3", "Option 2", "Option 3", "Option 2", "Option 3"),
         onStartClick = {},
-        logo = ImageBitmap(100, 100),
-        appName = "App name"
     )
 }
 
