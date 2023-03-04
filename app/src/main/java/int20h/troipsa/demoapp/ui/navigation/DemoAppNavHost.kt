@@ -1,10 +1,10 @@
 package int20h.troipsa.demoapp.ui.navigation
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -36,14 +36,15 @@ fun DemoAppNavHost() {
         Screen.LegalScreen,
     )
 
+    var bottomNavigationVisible by remember { mutableStateOf(true) }
+
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         containerColor = Color.Transparent,
         contentColor = MaterialTheme.colorScheme.onBackground,
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
         bottomBar = {
-            // todo maybe will need to hide bottom bar on some screens
-            if (true) {
+            AnimatedVisibility(visible = bottomNavigationVisible) {
                 DemoAppBottomNavigation(
                     navController = navController,
                     bottomNavItems = bottomNavItems
@@ -53,6 +54,7 @@ fun DemoAppNavHost() {
     ) { innerPadding ->
         DemoAppNavigation(
             navController = navController,
+            showBottomSheet = { show -> bottomNavigationVisible = show },
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
@@ -70,6 +72,7 @@ fun DemoAppNavHost() {
 @Composable
 private fun DemoAppNavigation(
     navController: NavHostController,
+    showBottomSheet: (Boolean) -> Unit,
     modifier: Modifier = Modifier
 ) {
     AnimatedNavHost(
@@ -80,7 +83,7 @@ private fun DemoAppNavigation(
 
         horizontallyAnimatedComposable(Screen.MapScreen.route,) {
             MapScreenContent(
-                navController = navController,
+                showBottomSheet = showBottomSheet
                /* navigateToScreen2 = { arg ->
                     navController.navigate(Screen.ScheduleScreen.withArgs(arg.toString()))
                 },

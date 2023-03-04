@@ -72,17 +72,7 @@ fun LegalScreenContent() {
                         vertical = 8.dp
                     )
             )
-
         }
-//            Text(
-//                text = "Screen 3, argument: $argumentFromScreen1",
-//                color = MaterialTheme.colorScheme.onPrimaryContainer,
-//                modifier = Modifier
-//                    .background(color = MaterialTheme.colorScheme.primaryContainer)
-//                    .padding(16.dp)
-//                    .fillMaxWidth()
-//            )
-
     }
 }
 
