@@ -13,18 +13,13 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import int20h.troipsa.demoapp.R
-import int20h.troipsa.demoapp.ui.screens.screen_1.Screen1
-import int20h.troipsa.demoapp.ui.screens.screen_2.Screen2
-import int20h.troipsa.demoapp.ui.screens.screen_3.Screen3
+import int20h.troipsa.demoapp.ui.screens.map_screen.MapScreenContent
+import int20h.troipsa.demoapp.ui.screens.schedule_screen.ScheduleScreenContent
+import int20h.troipsa.demoapp.ui.screens.legal_screen.LegalScreenContent
 
 @OptIn(
     ExperimentalMaterial3Api::class,
@@ -36,8 +31,9 @@ fun DemoAppNavHost() {
     val navController = rememberAnimatedNavController()
 
     val bottomNavItems = listOf(
-        Screen.Screen1,
-        Screen.Screen2
+        Screen.MapScreen,
+        Screen.ScheduleScreen,
+        Screen.LegalScreen,
     )
 
     Scaffold(
@@ -78,38 +74,45 @@ private fun DemoAppNavigation(
 ) {
     AnimatedNavHost(
         navController = navController,
-        startDestination = Screen.Screen1.route,
+        startDestination = Screen.MapScreen.route,
         modifier = modifier
     ) {
-        horizontallyAnimatedComposable(Screen.Screen1.route) {
-            Screen1(
+
+        horizontallyAnimatedComposable(Screen.MapScreen.route,) {
+            MapScreenContent(
                 navController = navController,
-                navigateToScreen2 = { arg ->
-                    navController.navigate(Screen.Screen2.withArgs(arg.toString()))
+               /* navigateToScreen2 = { arg ->
+                    navController.navigate(Screen.ScheduleScreen.withArgs(arg.toString()))
                 },
                 navigateToScreen3 = { arg ->
                     navController.navigate(Screen.Screen3.withArgs(arg.toString()))
-                }
+                }*/
             )
         }
         horizontallyAnimatedComposable(
-            route = Screen.Screen2.route,
+             route = Screen.ScheduleScreen.route,
+             directionRight = { initialState.destination.route != Screen.LegalScreen.route }
         ) {
-            Screen2(
+            ScheduleScreenContent(
                 popBackStack = { navController.popBackStack() }
             )
         }
-        verticallyAnimatedComposable(
+        horizontallyAnimatedComposable( Screen.LegalScreen.route) {
+            LegalScreenContent(
+                popBackStack = { navController.popBackStack() }
+            )
+        }
+       /* verticallyAnimatedComposable(
             route = Screen.Screen3.withArgsFormat(Screen.Screen3.demoArgument),
             arguments = listOf(
                 navArgument(Screen.Screen3.demoArgument) { type = NavType.IntType }
             )
         ) { navBackStackEntry ->
-            Screen3(
+            LegalScreenContent(
                 argumentFromScreen1 = navBackStackEntry.arguments?.getInt(Screen.Screen3.demoArgument),
                 popBackStack = { navController.popBackStack() }
             )
-        }
+        }*/
     }
 }
 

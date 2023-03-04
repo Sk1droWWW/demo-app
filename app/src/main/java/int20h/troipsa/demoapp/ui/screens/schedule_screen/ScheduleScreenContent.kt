@@ -1,10 +1,9 @@
-package int20h.troipsa.demoapp.ui.screens.screen_2
+package int20h.troipsa.demoapp.ui.screens.schedule_screen
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -16,7 +15,7 @@ import int20h.troipsa.demoapp.ui.base.ui.defaultTopBarProvider
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Screen2(
+fun ScheduleScreenContent(
     popBackStack: () -> Unit,
 ) {
 

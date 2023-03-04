@@ -9,10 +9,11 @@ sealed class Screen(
     @StringRes val resourceId: Int,
     @DrawableRes val iconRes: Int? = null,
 ) {
-    object Screen1 : Screen("calendar", R.string.screen_1_string_1, R.drawable.ic_calendar)
-    object Screen2 : Screen("screen2", R.string.screen_2_string_1, R.drawable.ic_calendar)
+    object MapScreen : Screen("map_screen", R.string.map_screen_title, R.drawable.ic_map)
+    object ScheduleScreen : Screen("schedule_screen", R.string.schedule_screen_title, R.drawable.ic_schedule)
+    object LegalScreen : Screen("legal_screen", R.string.legal_screen_title, R.drawable.ic_legal)
 
-    object Screen3 : Screen("screen3", R.string.screen_1_string_1) {
+    object Screen3 : Screen("screen3", R.string.map_screen_title) {
         val demoArgument = "demoArgument"
     }
 

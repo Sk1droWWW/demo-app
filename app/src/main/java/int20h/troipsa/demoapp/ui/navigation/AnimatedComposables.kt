@@ -20,6 +20,7 @@ private typealias SlideDirection = AnimatedContentScope.SlideDirection
 fun NavGraphBuilder.horizontallyAnimatedComposable(
     route: String,
     arguments: List<NamedNavArgument> = emptyList(),
+    directionRight: AnimatedContentScope<NavBackStackEntry>.() -> Boolean = { true },
     content: @Composable AnimatedVisibilityScope.(NavBackStackEntry) -> Unit,
 ) {
     composable(
@@ -27,19 +28,56 @@ fun NavGraphBuilder.horizontallyAnimatedComposable(
         content = content,
         arguments = arguments,
         enterTransition = {
-            slideIntoContainer(SlideDirection.Left, animationSpec = tween(animDurationMillis))
+            slideIntoContainer(
+                with(SlideDirection) { if(directionRight()) Left else Right },
+                animationSpec = tween(animDurationMillis)
+            )
         },
         exitTransition = {
-            slideOutOfContainer(SlideDirection.Left, animationSpec = tween(animDurationMillis))
+            slideOutOfContainer(
+                with(SlideDirection) { if(directionRight()) Left else Right },
+                animationSpec = tween(animDurationMillis)
+            )
         },
         popEnterTransition = {
-            slideIntoContainer(SlideDirection.Right, animationSpec = tween(animDurationMillis))
+            slideIntoContainer(
+                with(SlideDirection) { if(directionRight()) Right else Left },
+                animationSpec = tween(animDurationMillis)
+            )
         },
         popExitTransition = {
-            slideOutOfContainer(SlideDirection.Right, animationSpec = tween(animDurationMillis))
+            slideOutOfContainer(
+                with(SlideDirection) { if(directionRight()) Right else Left },
+                animationSpec = tween(animDurationMillis)
+            )
         },
     )
 }
+//
+//@OptIn(ExperimentalAnimationApi::class)
+//fun NavGraphBuilder.leftHorizontallyAnimatedComposable(
+//    route: String,
+//    arguments: List<NamedNavArgument> = emptyList(),
+//    content: @Composable AnimatedVisibilityScope.(NavBackStackEntry) -> Unit,
+//) {
+//    composable(
+//        route = route,
+//        content = content,
+//        arguments = arguments,
+//        enterTransition = {
+//            slideIntoContainer(SlideDirection.Left, animationSpec = tween(animDurationMillis))
+//        },
+//        exitTransition = {
+//            slideOutOfContainer(SlideDirection.Left, animationSpec = tween(animDurationMillis))
+//        },
+//        popEnterTransition = {
+//            slideIntoContainer(SlideDirection.Right, animationSpec = tween(animDurationMillis))
+//        },
+//        popExitTransition = {
+//            slideOutOfContainer(SlideDirection.Right, animationSpec = tween(animDurationMillis))
+//        },
+//    )
+//}
 
 @OptIn(ExperimentalAnimationApi::class)
 fun NavGraphBuilder.verticallyAnimatedComposable(

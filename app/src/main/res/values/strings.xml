@@ -1,11 +1,15 @@
 <resources>
     <string name="app_name">DemoApp</string>
 
-    <!--Screen 1-->
-    <string name="screen_1_string_1">string 1</string>
-    <!--Screen 1-->
+    <!--Map Screen-->
+    <string name="map_screen_title">Map</string>
+    <!--Map Screen-->
 
-    <!--Screen 2-->
-    <string name="screen_2_string_1">string 1</string>
-    <!--Screen 2-->
+    <!--Schedule Screen-->
+    <string name="schedule_screen_title">Schedule</string>
+    <!--Schedule Screen-->
+
+    <!--Schedule Screen-->
+    <string name="legal_screen_title">Legal</string>
+    <!--Schedule Screen-->
 </resources>

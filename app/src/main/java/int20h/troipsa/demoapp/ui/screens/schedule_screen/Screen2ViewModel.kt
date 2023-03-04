@@ -1,4 +1,4 @@
-package int20h.troipsa.demoapp.ui.screens.screen_2
+package int20h.troipsa.demoapp.ui.screens.schedule_screen
 
 import dagger.hilt.android.lifecycle.HiltViewModel
 import int20h.troipsa.demoapp.ui.base.view_model.BaseViewModel

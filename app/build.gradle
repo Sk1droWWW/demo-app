@@ -118,9 +118,6 @@ dependencies {
     // Kotlinx Serialization
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlin_serialization"
 
-    // Gson
-    implementation "com.google.code.gson:gson:$gson_version"
-
     // Coil Image
     implementation "io.coil-kt:coil-compose:$coil_version"
 

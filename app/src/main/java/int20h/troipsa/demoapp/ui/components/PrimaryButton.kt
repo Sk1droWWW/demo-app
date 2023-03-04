@@ -11,7 +11,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import int20h.troipsa.demoapp.DemoApp
 import int20h.troipsa.demoapp.ui.theme.DemoAppTheme
 
 @Composable
@@ -41,8 +40,12 @@ fun PrimaryButton(
 
 @Preview
 @Composable
-fun Preview() {
+private fun PrimaryButtonPreview() {
     DemoAppTheme {
-        PrimaryButton(text = "Primary Button", onClick = {}, modifier = Modifier.fillMaxWidth())
+        PrimaryButton(
+            text = "Primary Button",
+            onClick = {},
+            modifier = Modifier.fillMaxWidth()
+        )
     }
 }
