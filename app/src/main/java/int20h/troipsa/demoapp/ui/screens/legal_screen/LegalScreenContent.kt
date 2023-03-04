@@ -36,7 +36,6 @@ fun LegalScreenContent() {
                     .padding(16.dp)
                     .fillMaxWidth()
             )
-//            Spacer(modifier = Modifier.weight(1f))
             Text(
                 text = "Important:",
                 style = MaterialTheme.typography.headlineSmall,
