@@ -1,33 +1,80 @@
 package int20h.troipsa.demoapp.ui.screens.legal_screen
 
-import androidx.compose.foundation.background
+import android.content.Intent
+import android.net.Uri
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import int20h.troipsa.demoapp.BuildConfig
+import int20h.troipsa.demoapp.R
 import int20h.troipsa.demoapp.ui.base.ui.PseudoScaffold
 import int20h.troipsa.demoapp.ui.components.PrimaryButton
 import int20h.troipsa.demoapp.ui.theme.*
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LegalScreenContent(
-    popBackStack: () -> Unit,
-//    argumentFromScreen1: Int?,
-) {
-    PseudoScaffold(
-        modifier = Modifier.systemBarsPadding(),
-    ) {
+fun LegalScreenContent() {
+    PseudoScaffold {
         Column(
-            modifier = Modifier
-                .background(color = Color.Green.copy(alpha = 0.2f))
-                .fillMaxSize()
+            modifier = Modifier.fillMaxSize()
         ) {
+            Image(
+                painter = painterResource(id = R.drawable.img_legal),
+                contentDescription = null,
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth()
+            )
+//            Spacer(modifier = Modifier.weight(1f))
+            Text(
+                text = "Important:",
+                style = MaterialTheme.typography.headlineSmall,
+                color = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier
+                    .padding(horizontal = 16.dp)
+                    .fillMaxWidth()
+            )
+            Text(
+                text = stringResource(id = R.string.legal_screen_info),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onBackground,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth()
+            )
+            Spacer(modifier = Modifier.weight(1f))
+
+            val context = LocalContext.current
+            PrimaryButton(
+                text = stringResource(id = R.string.legal_screen_contact_us),
+                onClick = {
+                    val intent = Intent(Intent.ACTION_SENDTO).apply {
+                        data = Uri.parse("mailto:")
+                        putExtra(Intent.EXTRA_EMAIL, arrayOf(BuildConfig.CONTACT_EMAIL))
+                    }
+                    context.startActivity(Intent.createChooser(intent, "Send Email"))
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        horizontal = 16.dp,
+                        vertical = 8.dp
+                    )
+            )
+
+        }
 //            Text(
 //                text = "Screen 3, argument: $argumentFromScreen1",
 //                color = MaterialTheme.colorScheme.onPrimaryContainer,
@@ -36,51 +83,13 @@ fun LegalScreenContent(
 //                    .padding(16.dp)
 //                    .fillMaxWidth()
 //            )
-        }
-    }
-}
 
-@Composable
-private fun Screen1(
-    navigateToScreen2: (Long) -> Unit
-) {
-    val coroutineScope = rememberCoroutineScope()
-    LazyColumn(
-        modifier = Modifier
-            .background(color = Color.Cyan.copy(alpha = 0.2f))
-            .fillMaxSize()
-//            .background(pageBackgroundColor),
-    ) {
-        item {
-            PrimaryButton(
-                text = "Sample Button",
-                onClick = { /*TODO*/ },
-                modifier = Modifier
-                    .padding(16.dp)
-                    .fillMaxWidth()
-            )
-        }
-//        repeat(20) {
-//            item {
-//                Text(
-//                    text = "Another screen",
-//                    fontSize = 12.sp,
-//                    color = MaterialTheme.colorScheme.onPrimaryContainer,
-//                    modifier = Modifier
-//                        .background(MaterialTheme.colorScheme.primaryContainer)
-//                        .padding(16.dp)
-////                        .clickable { navigateToScreen2(0) }
-//                )
-//            }
-//        }
     }
 }
 
 @Preview
 @Composable
 private fun Preview() {
-    Screen1(
-        navigateToScreen2 = {},
-    )
+    LegalScreenContent()
 }
 

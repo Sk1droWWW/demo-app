@@ -27,6 +27,7 @@ android {
         }
 
         buildConfigField("String", "BASE_URL", "\"http://stab\"")
+        buildConfigField("String", "CONTACT_EMAIL", "\"contact.campusconnect@gmail.com\"")
     }
 
 

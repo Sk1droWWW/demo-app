@@ -97,10 +97,11 @@ private fun DemoAppNavigation(
                 popBackStack = { navController.popBackStack() }
             )
         }
-        horizontallyAnimatedComposable( Screen.LegalScreen.route) {
-            LegalScreenContent(
-                popBackStack = { navController.popBackStack() }
-            )
+        horizontallyAnimatedComposable(
+            route = Screen.LegalScreen.route,
+            directionRight = { targetState.destination.route != Screen.ScheduleScreen.route }
+        ) {
+            LegalScreenContent()
         }
        /* verticallyAnimatedComposable(
             route = Screen.Screen3.withArgsFormat(Screen.Screen3.demoArgument),

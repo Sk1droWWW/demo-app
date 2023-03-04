@@ -10,6 +10,9 @@
     <!--Schedule Screen-->
 
     <!--Schedule Screen-->
-    <string name="legal_screen_title">Legal</string>
+    <string name="legal_screen_title">Additional</string>
+    <string name="legal_screen_screen_title">Additional</string>
+    <string name="legal_screen_contact_us">Contact Us</string>
+    <string name="legal_screen_info">If you want your educational institution to be added to our application, you need to:\n1. Contact our team.\n2. Provide coordinates of buildings and its entrances.\n3. Give details about study schedule.\n\nWe will agree with you on further communication and keep you informed about the implementation.</string>
     <!--Schedule Screen-->
 </resources>
