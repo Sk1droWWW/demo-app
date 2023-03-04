@@ -3,25 +3,22 @@ package int20h.troipsa.demoapp.ui.components
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import int20h.troipsa.demoapp.DemoApp
-import int20h.troipsa.demoapp.ui.theme.DemoAppTheme
 
 @Composable
-fun PrimaryButton(
+fun PrimaryTonalButton(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     uppercase: Boolean = true,
 ) {
-    Button(
+    FilledTonalButton(
         onClick = onClick,
         modifier = modifier,
         contentPadding = PaddingValues(
@@ -36,13 +33,5 @@ fun PrimaryButton(
             textAlign = TextAlign.Center,
             modifier = Modifier.fillMaxWidth()
         )
-    }
-}
-
-@Preview
-@Composable
-fun Preview() {
-    DemoAppTheme {
-        PrimaryButton(text = "Primary Button", onClick = {}, modifier = Modifier.fillMaxWidth())
     }
 }

@@ -17,7 +17,6 @@ import int20h.troipsa.demoapp.ui.base.ui.defaultTopBarProvider
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Screen2(
-    argFromScreen1: Int?,
     popBackStack: () -> Unit,
 ) {
 

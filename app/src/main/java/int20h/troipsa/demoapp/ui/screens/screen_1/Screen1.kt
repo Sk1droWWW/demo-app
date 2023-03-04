@@ -17,6 +17,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import int20h.troipsa.demoapp.ui.base.ui.PseudoScaffold
 import int20h.troipsa.demoapp.ui.components.PrimaryButton
+import int20h.troipsa.demoapp.ui.components.SecondaryButton
+import int20h.troipsa.demoapp.ui.components.SecondaryTextButton
 import int20h.troipsa.demoapp.ui.theme.*
 import int20h.troipsa.demoapp.utils.extension.clickable
 
@@ -54,7 +56,7 @@ private fun Screen1(
 //            .background(pageBackgroundColor),
     ) {
         item {
-            PrimaryButton(
+            SecondaryTextButton(
                 text = "Sample Button",
                 onClick = { navigateToScreen3(3) },
                 modifier = Modifier

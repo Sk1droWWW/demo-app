@@ -37,7 +37,7 @@ fun DemoAppNavHost() {
 
     val bottomNavItems = listOf(
         Screen.Screen1,
-        Screen.Screen3
+        Screen.Screen2
     )
 
     Scaffold(
@@ -92,14 +92,10 @@ private fun DemoAppNavigation(
                 }
             )
         }
-        verticallyAnimatedComposable(
-            route = Screen.Screen2.withArgsFormat(Screen.Screen2.arg),
-            arguments = listOf(
-                navArgument(Screen.Screen2.arg) { type = NavType.IntType }
-            )
-        ) { navBackStackEntry ->
+        horizontallyAnimatedComposable(
+            route = Screen.Screen2.route,
+        ) {
             Screen2(
-                argFromScreen1 = navBackStackEntry.arguments?.getInt(Screen.Screen2.arg),
                 popBackStack = { navController.popBackStack() }
             )
         }
