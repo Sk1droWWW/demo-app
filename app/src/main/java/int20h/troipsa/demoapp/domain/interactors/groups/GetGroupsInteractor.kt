@@ -14,7 +14,6 @@ class GetGroupsInteractor @Inject constructor(
     suspend operator fun invoke(): List<Group> {
         val k = dataRepository.fetchGroupsFromApi().data
             .map { group -> GroupMapper.mapToDomain(group) }
-        Log.i("Map", "(${k})")
         return k
     }
 }
