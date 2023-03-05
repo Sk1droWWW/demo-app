@@ -1,14 +1,17 @@
 package int20h.troipsa.demoapp.data.network.models
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.google.gson.annotations.SerializedName
 
-@Serializable
+data class GroupDataApiModel(
+    @SerializedName("data")
+    val data: List<GroupApiModel>
+)
+
 data class GroupApiModel(
-    @SerialName("id")
-    val id: Int,
-    @SerialName("name")
+    @SerializedName("id")
+    val id: String,
+    @SerializedName("name")
     val name: String,
-    @SerialName("faculty")
+    @SerializedName("faculty")
     val faculty: String,
 )

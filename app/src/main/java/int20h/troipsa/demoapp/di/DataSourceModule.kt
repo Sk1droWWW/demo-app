@@ -1,7 +1,6 @@
 package int20h.troipsa.demoapp.di
 
 import android.content.Context
-import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,10 +11,10 @@ import int20h.troipsa.demoapp.data.local.MainDatabase
 import int20h.troipsa.demoapp.data.network.ApiService
 import int20h.troipsa.demoapp.data.prefs.DemoPrefManager
 import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -52,7 +51,8 @@ class DataSourceModule {
 
         val retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)
-            .addConverterFactory(Json.asConverterFactory(contentType))
+//            .addConverterFactory(Json.asConverterFactory(contentType))
+            .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
 
