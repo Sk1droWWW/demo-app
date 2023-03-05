@@ -18,4 +18,6 @@
     <string name="select_group_label">Select Group</string>
     <string name="select_university_label">Select University</string>
     <!--Schedule Screen-->
+
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>

@@ -1,4 +1,4 @@
-package int20h.troipsa.demoapp.ui.screens.map_screen
+package int20h.troipsa.demoapp.ui.screens.map
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
@@ -7,7 +7,6 @@ import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -19,9 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import int20h.troipsa.demoapp.R
 import int20h.troipsa.demoapp.ui.base.ui.PseudoScaffold
-import int20h.troipsa.demoapp.ui.screens.suggest_screen.SuggestLocationDialog
-import int20h.troipsa.demoapp.ui.theme.*
-import kotlinx.coroutines.CoroutineScope
+import int20h.troipsa.demoapp.ui.screens.suggest_location.SuggestLocationDialog
 import kotlinx.coroutines.launch
 
 @Composable

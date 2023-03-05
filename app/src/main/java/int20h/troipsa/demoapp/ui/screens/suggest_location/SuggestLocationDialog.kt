@@ -1,4 +1,4 @@
-package int20h.troipsa.demoapp.ui.screens.suggest_screen
+package int20h.troipsa.demoapp.ui.screens.suggest_location
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
@@ -17,7 +17,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import int20h.troipsa.demoapp.R
 import int20h.troipsa.demoapp.ui.base.ui.PseudoScaffold
 import int20h.troipsa.demoapp.ui.components.PrimaryButton
-import int20h.troipsa.demoapp.ui.screens.map_screen.Screen1ViewModel
+import int20h.troipsa.demoapp.ui.screens.map.Screen1ViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
