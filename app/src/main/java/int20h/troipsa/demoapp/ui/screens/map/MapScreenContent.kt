@@ -116,6 +116,7 @@ fun MapScreenContent(
                 )
             ) {
                 SuggestLocationDialog(
+                    pointSelected = pointSelected,
                     onDismiss = {
                         showBottomSheet(true)
                         sheetVisible = false

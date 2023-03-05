@@ -1,5 +1,6 @@
 package int20h.troipsa.demoapp.ui.screens.suggest_location
 
+import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -11,18 +12,25 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.google.android.gms.maps.model.CameraPosition
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.PolygonOptions
+import com.google.maps.android.compose.*
 import int20h.troipsa.demoapp.R
 import int20h.troipsa.demoapp.ui.base.ui.PseudoScaffold
 import int20h.troipsa.demoapp.ui.components.PrimaryButton
 import int20h.troipsa.demoapp.ui.screens.map.Screen1ViewModel
+import int20h.troipsa.demoapp.ui.screens.map.buildingPolygons
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SuggestLocationDialog(
     onDismiss: () -> Unit,
+    pointSelected: Pair<LatLng, Boolean>,
 ) {
     BackHandler {
         onDismiss()
@@ -114,12 +122,48 @@ fun SuggestLocationDialog(
                         .padding(top = 16.dp)
                         .padding(horizontal = 16.dp)
                 )
-                Box(
+
+                val strokeColor = MaterialTheme.colorScheme.secondary
+                val fillColor = MaterialTheme.colorScheme.secondary.copy(alpha = 0.2f)
+                GoogleMap(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(200.dp)
-                        .background(Color.Cyan.copy(alpha = 0.2f))
-                )
+                        .height(300.dp),
+                    cameraPositionState = rememberCameraPositionState {
+                        position = CameraPosition.fromLatLngZoom(pointSelected.first, 15.5f)
+                    },
+                    uiSettings = MapUiSettings(
+                        zoomControlsEnabled = false,
+                    ),
+
+                    ) {
+                    MapEffect(Unit) { map ->
+//                    map.setMapStyle(
+//                        MapStyleOptions.loadRawResourceStyle(context, R.raw.map_style)
+//                    )
+
+                        map.isBuildingsEnabled = true
+                        map.isIndoorEnabled = true
+
+                        map.addPolygon(
+                            PolygonOptions()
+                                .addAll(buildingPolygons)
+                                .strokeWidth(2f)
+                                .strokeColor(strokeColor.toArgb())
+                                .fillColor(fillColor.toArgb())
+                                .clickable(true)
+                        )
+
+                    }
+                    if (pointSelected.second) {
+                        Marker(
+                            state = MarkerState(position = pointSelected.first),
+                            draggable = true,
+//                        icon = LocalContext.current
+//                            .getBitmapDescriptorFromResource(R.drawable.ic_map_marker),
+                        )
+                    }
+                }
             }
 
             PrimaryButton(
