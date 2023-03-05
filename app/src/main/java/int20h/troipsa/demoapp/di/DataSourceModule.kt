@@ -34,7 +34,7 @@ class DataSourceModule {
     fun provideApiService(): ApiService {
         val okHttpClient = createOkHttpClient()
 
-        return createRetrofitService(okHttpClient, BuildConfig.BASE_URL)
+        return createRetrofitService(okHttpClient, BuildConfig.BASE_SCHEDULE_URL)
     }
 
     @Provides

@@ -26,7 +26,7 @@ android {
             useSupportLibrary true
         }
 
-        buildConfigField("String", "BASE_URL", "\"http://stab\"")
+        buildConfigField("String", "BASE_SCHEDULE_URL", "\"https://schedule.kpi.ua/api/\"")
         buildConfigField("String", "CONTACT_EMAIL", "\"contact.campusconnect@gmail.com\"")
     }
 
