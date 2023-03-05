@@ -15,6 +15,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import int20h.troipsa.demoapp.R
 import int20h.troipsa.demoapp.ui.base.ui.PseudoScaffold
 import int20h.troipsa.demoapp.ui.base.ui.defaultTopBarProvider
+import int20h.troipsa.demoapp.ui.screens.schedule_screen.ScheduleScreenViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
