@@ -1,6 +1,5 @@
 package int20h.troipsa.demoapp.domain.interactors.groups
 
-import android.util.Log
 import int20h.troipsa.demoapp.data.local.mapper.GroupMapper
 import int20h.troipsa.demoapp.data.repository.DataRepository
 import int20h.troipsa.demoapp.data.repository.group.fetchGroupsFromApi
