@@ -17,9 +17,9 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import int20h.troipsa.demoapp.R
-import int20h.troipsa.demoapp.ui.screens.map_screen.MapScreenContent
-import int20h.troipsa.demoapp.ui.screens.schedule_screen.ScheduleScreenContent
-import int20h.troipsa.demoapp.ui.screens.legal_screen.LegalScreenContent
+import int20h.troipsa.demoapp.ui.screens.map.MapScreenContent
+import int20h.troipsa.demoapp.ui.screens.schedule.ScheduleScreenContent
+import int20h.troipsa.demoapp.ui.screens.legal.LegalScreenContent
 
 @OptIn(
     ExperimentalMaterial3Api::class,

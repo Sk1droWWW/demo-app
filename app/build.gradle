@@ -5,6 +5,7 @@ plugins {
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id 'org.jetbrains.kotlin.plugin.serialization'
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 
 apply plugin: 'com.google.devtools.ksp'
@@ -80,6 +81,12 @@ dependencies {
     // Firebase
     implementation platform("com.google.firebase:firebase-bom:$firebase_bom_version")
     implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    implementation 'com.google.maps.android:maps-compose:2.11.0'
+    // Optionally, you can include the utils library if you want to use Clustering, etc.
+    implementation 'com.google.maps.android:maps-compose-utils:2.11.0'
+    // Optionally, you can include the widgets library if you want to use ScaleBar, etc.
+    implementation 'com.google.maps.android:maps-compose-widgets:2.11.0'
 
     // Compose
     def composeBom = platform('androidx.compose:compose-bom:2022.12.00')

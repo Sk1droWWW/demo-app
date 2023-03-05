@@ -1,4 +1,4 @@
-package int20h.troipsa.demoapp.ui.screens.location_description_content
+package int20h.troipsa.demoapp.ui.screens.location_description
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

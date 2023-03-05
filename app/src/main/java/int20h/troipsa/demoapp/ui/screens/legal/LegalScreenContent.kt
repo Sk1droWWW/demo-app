@@ -1,4 +1,4 @@
-package int20h.troipsa.demoapp.ui.screens.legal_screen
+package int20h.troipsa.demoapp.ui.screens.legal
 
 import android.content.Intent
 import android.net.Uri

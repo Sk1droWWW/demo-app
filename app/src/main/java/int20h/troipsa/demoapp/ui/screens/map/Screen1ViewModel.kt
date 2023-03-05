@@ -1,4 +1,4 @@
-package int20h.troipsa.demoapp.ui.screens.map_screen
+package int20h.troipsa.demoapp.ui.screens.map
 
 import dagger.hilt.android.lifecycle.HiltViewModel
 import int20h.troipsa.demoapp.domain.interactors.GetSampleInteractor

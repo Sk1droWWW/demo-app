@@ -1,4 +1,4 @@
-package int20h.troipsa.demoapp.ui.screens.schedule_screen
+package int20h.troipsa.demoapp.ui.screens.schedule
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.fillMaxSize
