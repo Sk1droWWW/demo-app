@@ -1,33 +1,41 @@
 {
   "project_info": {
-    "project_number": "820401937020",
-    "project_id": "int20-mapapp",
-    "storage_bucket": "int20-mapapp.appspot.com"
+    "project_number": "1006862065737",
+    "project_id": "campusconnect-379623",
+    "storage_bucket": "campusconnect-379623.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:820401937020:android:f9bcc8da427810f1a907f9",
+        "mobilesdk_app_id": "1:1006862065737:android:280c7fb30ff8c646639f98",
         "android_client_info": {
           "package_name": "int20h.troipsa.demoapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "820401937020-f7nnm5knpel9slcd6dgvkin90i64jrc2.apps.googleusercontent.com",
+          "client_id": "1006862065737-0tn265160flatlffpbhp6av3vb3tovfa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "int20h.troipsa.demoapp",
+            "certificate_hash": "2fd76c53f0ed43056dd191f1d38a433ec03971e6"
+          }
+        },
+        {
+          "client_id": "1006862065737-cq9j7l2v5a5skf12eg954os818mjrhvd.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD7J8sc2v6WQM1ciJBysx5fxPE0QFqqqX0"
+          "current_key": "AIzaSyDJ335FkYVAyXYypvHOwI_x_rbwRq7Zxrk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "820401937020-f7nnm5knpel9slcd6dgvkin90i64jrc2.apps.googleusercontent.com",
+              "client_id": "1006862065737-cq9j7l2v5a5skf12eg954os818mjrhvd.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
